@@ -192,24 +192,6 @@ The dashboard integrates with three main Django API endpoints:
 - Lazy loading of chart components
 - Optimized re-renders with React.memo
 
-## Troubleshooting
-
-### Common Issues
-
-1. **CORS Errors**
-   - Check `cors-config.md` for Django CORS setup
-   - Ensure Django server is running on port 8000
-
-2. **API Connection Issues**
-   - Verify Django server is running
-   - Check API endpoints are accessible
-   - Review browser console for errors
-
-3. **Chart Not Loading**
-   - Check API response format
-   - Verify data transformation logic
-   - Review chart component props
-
 ## Browser Support
 
 - Chrome (latest)
