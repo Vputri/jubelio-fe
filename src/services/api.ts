@@ -98,7 +98,7 @@ const createMockChartData = () => {
 
   // Create mock heatmap data
   const categories = [...new Set(mockProducts.map(p => p.category))];
-  const states = [...new Set(mockProducts.map(p => p.state))];
+  // const states = [...new Set(mockProducts.map(p => p.state))];
   
   const heatmapData: QuantityByCountryData = {
     countries: ['United States'],
