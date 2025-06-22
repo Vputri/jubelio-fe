@@ -60,8 +60,9 @@
 
 .filter-group {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 10px;
 }
 
 .filter-group label {
@@ -96,7 +97,7 @@
 
 .api-info {
   margin-top: 15px;
-  text-align: center;
+  text-align: right;
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.85rem;
 }
@@ -116,11 +117,30 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.chart-description {
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+.chart-conclusion {
+  padding: 10px 15px;
+  background-color: #e9ecef;
+  border-top: 1px solid #dee2e6;
+  font-size: 0.9rem;
+  color: #212529;
+  font-style: italic;
 }
 
 .chart-card.full-width {
@@ -129,8 +149,9 @@
 
 .chart-container {
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 400px;
+  flex-shrink: 0;
 }
 
 .loading {

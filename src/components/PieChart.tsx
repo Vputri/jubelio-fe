@@ -16,11 +16,11 @@ export const PieChart: React.FC<PieChartProps> = ({ labels, data }) => {
       marker: {
         colors: [
           '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
-          '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
+          '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9', '#FAD7A0'
         ]
       },
-      textinfo: 'label+percent',
-      textposition: 'outside',
+      textinfo: 'percent',
+      textposition: 'inside',
       automargin: true,
     } as any
   ];
@@ -34,9 +34,14 @@ export const PieChart: React.FC<PieChartProps> = ({ labels, data }) => {
     margin: { t: 50, b: 50, l: 50, r: 50 },
     showlegend: true,
     legend: {
-      orientation: 'v',
-      x: 1.05,
-      y: 0.5
+      orientation: 'h',
+      x: 0.5,
+      y: -0.1,
+      xanchor: 'center',
+      yanchor: 'top',
+      font: {
+        size: 9
+      }
     }
   };
 

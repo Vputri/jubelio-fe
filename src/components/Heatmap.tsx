@@ -35,7 +35,8 @@ export const Heatmap: React.FC<HeatmapProps> = ({ z, x, y }) => {
     },
     yaxis: {
       title: { text: 'Product Categories' },
-      gridcolor: '#E8E8E8'
+      gridcolor: '#E8E8E8',
+      automargin: true
     },
     height: 400,
     margin: { t: 50, b: 60, l: 120, r: 50 },
