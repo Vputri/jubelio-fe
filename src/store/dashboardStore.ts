@@ -26,7 +26,7 @@ const mockProducts: Product[] = [
   { id: '10', name: 'Bookshelf', category: 'Furniture', price: 150, discount: 22, quantitySold: 120, state: 'Texas' },
 ];
 
-export const useDashboardStore = create<DashboardState>((set, get) => ({
+export const useDashboardStore = create<DashboardState>((set) => ({
   products: mockProducts,
   chartData: null,
   isLoading: false,
