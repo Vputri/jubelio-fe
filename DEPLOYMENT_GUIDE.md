@@ -22,7 +22,7 @@ https://jubelio-fe.vercel.app
 - Presentasi akan langsung terbuka
 
 #### **3. Share Link**
-- Copy URL: `https://https://jubelio-fe.vercel.app/presentasi.html`
+- Copy URL: `https://jubelio-fe.vercel.app/presentasi.html`
 - Share ke tim atau stakeholder
 
 ### 🎯 **Fitur Presentasi Online**
@@ -35,18 +35,19 @@ https://jubelio-fe.vercel.app
   - Tombol "Selanjutnya" dan "Sebelumnya"
   - Counter slide di navigation bar
 
-#### **Konten Presentasi (11 Slide):**
-1. **Judul & Overview** - Pengenalan project
-2. **Overview Project** - Tujuan dan fitur utama
-3. **Technology Stack** - Stack teknologi
-4. **Fitur Charts** - Detail 3 chart
-5. **Architecture & Data Flow** - Arsitektur sistem
-6. **Project Structure** - Struktur folder
-7. **Key Features** - Fitur-fitur utama
-8. **Setup & Installation** - Cara setup
-9. **Demo & Testing** - Cara testing
-10. **Future Enhancements** - Pengembangan masa depan
-11. **Kesimpulan** - Ringkasan achievements
+#### **Konten Presentasi (12 Slide):**
+1. **Judul & Agenda** - Cover & agenda presentasi
+2. **Ringkasan Proyek** - Tujuan, dataset, output
+3. **Technology Stack** - Stack backend & frontend
+4. **Arsitektur Sistem** - Diagram arsitektur data flow
+5. **Database Models** - Struktur model Django
+6. **API Endpoints** - Daftar endpoint utama
+7. **Data Insights** - Insight penjualan & metrik
+8. **Manfaat Bisnis** - Analytics & strategic benefits
+9. **Fitur Teknis & Security** - Fitur backend & keamanan
+10. **Deployment, Demo & Testing** - Deployment, demo, testing
+11. **Future Enhancements** - Rencana pengembangan
+12. **Kesimpulan & Kontak** - Ringkasan & kontak
 
 ### 🔧 **Deploy ke Vercel**
 
@@ -80,7 +81,7 @@ vercel env add REACT_APP_API_URL
 ```
 https://jubelio-fe.vercel.app/
 ├── /                    # Dashboard utama
-├── /presentasi.html     # Presentasi project
+├── /presentasi.html     # Presentasi project (mix backend & frontend)
 ├── /assets/            # Static assets
 └── /api/               # API routes (jika ada)
 ```
@@ -94,7 +95,7 @@ https://jubelio-fe.vercel.app/
 
 #### **Menambah Slide Baru:**
 1. Edit `public/presentasi.html`
-2. Tambah slide baru dengan ID `slide12`
+2. Tambah slide baru dengan ID `slide13` dst.
 3. Update JavaScript counter
 4. Re-deploy
 
