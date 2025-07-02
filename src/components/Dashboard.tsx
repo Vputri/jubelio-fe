@@ -111,20 +111,20 @@ export const Dashboard: React.FC = () => {
     <div className="dashboard-container">
       <header className="dashboard-header">
         <div className="header-content">
-          <h1>📊 Sales Analytics Dashboard</h1>
-          <p>Real-time sales data visualization with interactive charts</p>
+          <div className="header-main">
+            <h1>📊 Sales Analytics Dashboard</h1>
+            <p>Real-time sales data visualization with interactive charts</p>
+            {isUsingMockData ? (
+              <div className="status warning">⚠️ Using demo data (API unavailable)</div>
+            ) : (
+              <div className="status success">✅ Connected to API</div>
+            )}
+          </div>
           <div className="header-actions">
             <a href="/presentasi.html" className="presentation-link" target="_blank">
               📋 Lihat Presentasi
             </a>
           </div>
-        </div>
-        <div className="data-status">
-          {isUsingMockData ? (
-            <div className="status warning">⚠️ Using demo data (API unavailable)</div>
-          ) : (
-            <div className="status success">✅ Connected to API</div>
-          )}
         </div>
       </header>
       

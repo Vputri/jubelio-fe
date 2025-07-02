@@ -7,22 +7,22 @@
 Setelah deploy ke Vercel, presentasi dapat diakses melalui:
 
 ```
-https://your-domain.vercel.app/presentasi.html
+https://jubelio-fe.vercel.app
 ```
 
 ### 📱 **Cara Mengakses Presentasi**
 
 #### **1. Melalui Dashboard**
-- Buka dashboard utama: `https://your-domain.vercel.app`
+- Buka dashboard utama: `https://jubelio-fe.vercel.app`
 - Klik tombol **"📋 Lihat Presentasi"** di header dashboard
 - Presentasi akan terbuka di tab baru
 
 #### **2. Langsung via URL**
-- Buka browser dan ketik: `https://your-domain.vercel.app/presentasi.html`
+- Buka browser dan ketik: `https://jubelio-fe.vercel.app/presentasi.html`
 - Presentasi akan langsung terbuka
 
 #### **3. Share Link**
-- Copy URL: `https://your-domain.vercel.app/presentasi.html`
+- Copy URL: `https://https://jubelio-fe.vercel.app/presentasi.html`
 - Share ke tim atau stakeholder
 
 ### 🎯 **Fitur Presentasi Online**
@@ -78,7 +78,7 @@ vercel env add REACT_APP_API_URL
 ### 📊 **Struktur File Setelah Deploy**
 
 ```
-your-domain.vercel.app/
+https://jubelio-fe.vercel.app/
 ├── /                    # Dashboard utama
 ├── /presentasi.html     # Presentasi project
 ├── /assets/            # Static assets
@@ -101,11 +101,11 @@ your-domain.vercel.app/
 ### 🔗 **Link Penting**
 
 #### **Dashboard:**
-- Main App: `https://your-domain.vercel.app`
+- Main App: `https://jubelio-fe.vercel.app`
 - API Status: Check console untuk connection status
 
 #### **Presentasi:**
-- Full Presentation: `https://your-domain.vercel.app/presentasi.html`
+- Full Presentation: `https://jubelio-fe.vercel.app/presentasi.html`
 - Direct Access: Copy URL dan share
 
 #### **Documentation:**
@@ -186,4 +186,4 @@ Presentasi Anda sekarang dapat diakses online dan siap untuk:
 - **Portfolio showcase**
 - **Documentation reference**
 
-**URL Presentasi:** `https://your-domain.vercel.app/presentasi.html` 
+**URL Presentasi:** `https://jubelio-fe.vercel.app/presentasi.html` 

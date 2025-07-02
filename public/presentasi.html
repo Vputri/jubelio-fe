@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5f7fa;
             color: #333;
             line-height: 1.6;
         }
@@ -55,10 +55,10 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             text-align: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
         }
 
         .slide h2 {
@@ -98,11 +98,11 @@
         }
 
         .feature-card {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            background: #ffffff;
             padding: 20px;
             border-radius: 15px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .tech-stack {
@@ -113,13 +113,16 @@
         }
 
         .tech-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
             padding: 15px;
             border-radius: 10px;
             text-align: center;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+        }
+        .tech-item h3, .tech-item p, .tech-item span, .tech-item li {
+            color: white !important;
         }
 
         .code-block {
@@ -133,7 +136,7 @@
         }
 
         .highlight {
-            background: linear-gradient(135deg, #ffd89b, #19547b);
+            background: #3b82f6;
             color: white;
             padding: 10px 20px;
             border-radius: 25px;
@@ -156,7 +159,7 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -187,7 +190,7 @@
 
         .demo-link {
             display: inline-block;
-            background: linear-gradient(135deg, #48bb78, #38a169);
+            background: #22c55e;
             color: white;
             padding: 15px 30px;
             text-decoration: none;
@@ -255,12 +258,12 @@
         }
 
         .header-info h3 {
-            color: white;
+            color: #1e293b;
             margin-bottom: 10px;
         }
 
         .header-info p {
-            color: rgba(255, 255, 255, 0.9);
+            color: #334155;
             font-size: 1.1em;
         }
     </style>
@@ -270,7 +273,7 @@
         <!-- Header Info -->
         <div class="header-info">
             <h3>📊 Dashboard Analytics Penjualan - Presentasi</h3>
-            <p>Setelah deploy, presentasi ini dapat diakses di: <strong>your-domain.vercel.app/presentasi.html</strong></p>
+            <p>Setelah deploy, presentasi ini dapat diakses di: <strong>https://jubelio-fe.vercel.app/presentasi.html</strong></p>
         </div>
 
         <!-- Slide 1: Judul -->
