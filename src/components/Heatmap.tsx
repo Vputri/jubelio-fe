@@ -2,9 +2,9 @@ import Plot from 'react-plotly.js';
 import type { Data, Layout } from 'plotly.js';
 
 interface HeatmapProps {
-  z: number[][]; // sales data matrix
-  x: string[]; // states
-  y: string[]; // product categories
+  z: number[][];
+  x: string[];
+  y: string[];
 }
 
 export const Heatmap: React.FC<HeatmapProps> = ({ z, x, y }) => {
@@ -21,7 +21,7 @@ export const Heatmap: React.FC<HeatmapProps> = ({ z, x, y }) => {
         title: 'Quantity Sold',
         titleside: 'right'
       }
-    } as any
+    } as Data
   ];
 
   const layout: Partial<Layout> = {

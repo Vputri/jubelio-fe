@@ -36,7 +36,7 @@ export const Dashboard: React.FC = () => {
   }
 
   // Check if using mock data
-  const isUsingMockData = !chartData.pieData.total_sales;
+  const isUsingMockData = ('isMock' in chartData.pieData && (chartData.pieData as { isMock?: boolean }).isMock) || !chartData.pieData.total_sales;
 
   // 1. Pie Chart: Find top selling product
   const pieData = (() => {
@@ -128,7 +128,7 @@ export const Dashboard: React.FC = () => {
         </div>
       </header>
       
-      <FilterPanel />
+      {!isUsingMockData && <FilterPanel />}
       
       <div className="dashboard-grid">
         <div className="chart-card">

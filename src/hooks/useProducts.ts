@@ -3,45 +3,120 @@ import {
   getMostSoldProducts,
   getDiscountQuantityCorrelation,
   getQuantityByCountry,
-  getAllChartData,
   getProducts,
   getProductsByCategory,
   getProductsByState,
   getTopSellingProducts
 } from '../services/api';
+import { useUIStore } from '../store/uiStore';
 
 // Hook for pie chart data (most sold products)
 export const useMostSoldProducts = () => {
+  const {
+    selectedCategory,
+    selectedSubcategory,
+    selectedCountry,
+    selectedStateCity,
+    selectedRegion,
+  } = useUIStore();
+
+  const filters = {
+    category: selectedCategory || undefined,
+    subcategory: selectedSubcategory || undefined,
+    country: selectedCountry || undefined,
+    state: selectedStateCity || undefined,
+    city: undefined,
+    region: selectedRegion || undefined,
+  };
+
   return useQuery({
-    queryKey: ['most-sold-products'],
-    queryFn: getMostSoldProducts,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    queryKey: ['most-sold-products', filters],
+    queryFn: () => getMostSoldProducts(filters),
+    staleTime: 5 * 60 * 1000,
   });
 };
 
 // Hook for scatter plot data (discount vs quantity correlation)
 export const useDiscountQuantityCorrelation = () => {
+  const {
+    selectedCategory,
+    selectedSubcategory,
+    selectedCountry,
+    selectedStateCity,
+    selectedRegion,
+  } = useUIStore();
+
+  const filters = {
+    category: selectedCategory || undefined,
+    subcategory: selectedSubcategory || undefined,
+    country: selectedCountry || undefined,
+    state: selectedStateCity || undefined,
+    city: undefined,
+    region: selectedRegion || undefined,
+  };
+
   return useQuery({
-    queryKey: ['discount-quantity-correlation'],
-    queryFn: getDiscountQuantityCorrelation,
+    queryKey: ['discount-quantity-correlation', filters],
+    queryFn: () => getDiscountQuantityCorrelation(filters),
     staleTime: 5 * 60 * 1000,
   });
 };
 
 // Hook for heatmap data (quantity by country)
 export const useQuantityByCountry = () => {
+  const {
+    selectedCategory,
+    selectedSubcategory,
+    selectedCountry,
+    selectedStateCity,
+    selectedRegion,
+  } = useUIStore();
+
+  const filters = {
+    category: selectedCategory || undefined,
+    subcategory: selectedSubcategory || undefined,
+    country: selectedCountry || undefined,
+    state: selectedStateCity || undefined,
+    city: undefined,
+    region: selectedRegion || undefined,
+  };
+
   return useQuery({
-    queryKey: ['quantity-by-country'],
-    queryFn: getQuantityByCountry,
+    queryKey: ['quantity-by-country', filters],
+    queryFn: () => getQuantityByCountry(filters),
     staleTime: 5 * 60 * 1000,
   });
 };
 
-// Hook for all chart data combined
+// Hook for all chart data combined, with filters
 export const useAllChartData = () => {
+  const {
+    selectedCategory,
+    selectedSubcategory,
+    selectedCountry,
+    selectedStateCity,
+    selectedRegion,
+  } = useUIStore();
+
+  const filters = {
+    category: selectedCategory || undefined,
+    subcategory: selectedSubcategory || undefined,
+    country: selectedCountry || undefined,
+    state: selectedStateCity || undefined,
+    city: undefined,
+    region: selectedRegion || undefined,
+  };
+
   return useQuery({
-    queryKey: ['all-chart-data'],
-    queryFn: getAllChartData,
+    queryKey: ['all-chart-data', filters],
+    queryFn: async () => {
+      const [pieData, scatterData, heatmapData] = await Promise.all([
+        getMostSoldProducts(filters),
+        getDiscountQuantityCorrelation(filters),
+        getQuantityByCountry(filters),
+      ]);
+      return { pieData, scatterData, heatmapData };
+    },
     staleTime: 5 * 60 * 1000,
   });
 };

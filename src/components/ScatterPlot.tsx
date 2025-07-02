@@ -2,9 +2,9 @@ import Plot from 'react-plotly.js';
 import type { Data, Layout } from 'plotly.js';
 
 interface ScatterPlotProps {
-  x: number[]; // discount percentages
-  y: number[]; // quantity sold
-  text: string[]; // product names
+  x: number[];
+  y: number[];
+  text: string[];
 }
 
 export const ScatterPlot: React.FC<ScatterPlotProps> = ({ x, y, text }) => {
@@ -27,7 +27,7 @@ export const ScatterPlot: React.FC<ScatterPlotProps> = ({ x, y, text }) => {
         }
       },
       name: 'Products'
-    } as any
+    } as Data
   ];
 
   const layout: Partial<Layout> = {

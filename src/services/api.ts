@@ -1,4 +1,5 @@
 import type { Product } from '../types/dashboard';
+import { buildQueryString } from '../utils/buildQueryString';
 
 // Mock API delay to simulate real API calls
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -62,6 +63,25 @@ export interface QuantityByCountryData {
   matrix: Record<string, Record<string, number>>;
 }
 
+export interface FilterOptions {
+  categories: string[];
+  subcategories: string[];
+  countries: string[];
+  cities: string[];
+  states: string[];
+  regions: string[];
+}
+
+export interface ApiFilters {
+  [key: string]: string | null | undefined;
+  category?: string | null;
+  subcategory?: string | null;
+  country?: string | null;
+  city?: string | null;
+  state?: string | null;
+  region?: string | null;
+}
+
 // Helper function to handle API errors
 const handleApiError = (response: Response) => {
   if (!response.ok) {
@@ -78,10 +98,11 @@ const createMockChartData = () => {
     return acc;
   }, {} as Record<string, number>);
 
-  const pieData: MostSoldProductsData = {
+  const pieData: MostSoldProductsData & { isMock?: boolean } = {
     labels: Object.keys(productSales),
     data: Object.values(productSales),
-    total_sales: Object.values(productSales).reduce((sum, val) => sum + val, 0)
+    total_sales: Object.values(productSales).reduce((sum, val) => sum + val, 0),
+    isMock: true
   };
 
   // Create mock scatter plot data
@@ -146,9 +167,10 @@ export const getTopSellingProducts = async (limit: number = 5): Promise<Product[
 };
 
 // Real API functions with fallback to mock data
-export const getMostSoldProducts = async (): Promise<MostSoldProductsData> => {
+export const getMostSoldProducts = async (filters: ApiFilters = {}): Promise<MostSoldProductsData> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/most-sold-products/`);
+    const query = buildQueryString(filters);
+    const response = await fetch(`${API_BASE_URL}/most-sold-products/${query}`);
     const result: ApiResponse<MostSoldProductsData> = await handleApiError(response);
     return result.data;
   } catch (error) {
@@ -158,9 +180,10 @@ export const getMostSoldProducts = async (): Promise<MostSoldProductsData> => {
   }
 };
 
-export const getDiscountQuantityCorrelation = async (): Promise<DiscountQuantityCorrelationData> => {
+export const getDiscountQuantityCorrelation = async (filters: ApiFilters = {}): Promise<DiscountQuantityCorrelationData> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/discount-quantity-correlation/`);
+    const query = buildQueryString(filters);
+    const response = await fetch(`${API_BASE_URL}/discount-quantity-correlation/${query}`);
     const result: ApiResponse<DiscountQuantityCorrelationData> = await handleApiError(response);
     return result.data;
   } catch (error) {
@@ -170,9 +193,10 @@ export const getDiscountQuantityCorrelation = async (): Promise<DiscountQuantity
   }
 };
 
-export const getQuantityByCountry = async (): Promise<QuantityByCountryData> => {
+export const getQuantityByCountry = async (filters: ApiFilters = {}): Promise<QuantityByCountryData> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/quantity-by-country/`);
+    const query = buildQueryString(filters);
+    const response = await fetch(`${API_BASE_URL}/quantity-by-country/${query}`);
     const result: ApiResponse<QuantityByCountryData> = await handleApiError(response);
     return result.data;
   } catch (error) {
@@ -201,6 +225,25 @@ export const getAllChartData = async () => {
   }
 };
 
+export const fetchFilterOptions = async (): Promise<FilterOptions> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/filter-options/`);
+    const result: ApiResponse<FilterOptions> = await handleApiError(response);
+    return result.data;
+  } catch (error) {
+    console.warn('API not available, using mock filter options:', error);
+    // Fallback mock data
+    return {
+      categories: ['Furniture', 'Office Supplies', 'Technology'],
+      subcategories: ['Accessories', 'Appliances', 'Art', 'Binders'],
+      countries: ['United States'],
+      cities: ['New York', 'Los Angeles', 'Chicago'],
+      states: ['California', 'Texas', 'New York', 'Florida'],
+      regions: ['Central', 'East', 'South', 'West'],
+    };
+  }
+};
+
 // Export api object for backward compatibility
 export const api = {
   getProducts,
@@ -210,5 +253,6 @@ export const api = {
   getMostSoldProducts,
   getDiscountQuantityCorrelation,
   getQuantityByCountry,
-  getAllChartData
+  getAllChartData,
+  fetchFilterOptions
 }; 

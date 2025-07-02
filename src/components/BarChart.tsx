@@ -22,7 +22,7 @@ export const PieChart: React.FC<PieChartProps> = ({ labels, data }) => {
       textinfo: 'label+percent',
       textposition: 'outside',
       automargin: true,
-    } as any
+    } as Data
   ];
 
   const layout: Partial<Layout> = {
