@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5f7fa;
             color: #333;
             line-height: 1.6;
         }
@@ -55,10 +55,10 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             text-align: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
         }
 
         .slide h2 {
@@ -98,11 +98,11 @@
         }
 
         .feature-card {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            background: #ffffff;
             padding: 20px;
             border-radius: 15px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .tech-stack {
@@ -113,13 +113,16 @@
         }
 
         .tech-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
             padding: 15px;
             border-radius: 10px;
             text-align: center;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+        }
+        .tech-item h3, .tech-item p, .tech-item span, .tech-item li {
+            color: white !important;
         }
 
         .code-block {
@@ -133,7 +136,7 @@
         }
 
         .highlight {
-            background: linear-gradient(135deg, #ffd89b, #19547b);
+            background: #3b82f6;
             color: white;
             padding: 10px 20px;
             border-radius: 25px;
@@ -156,7 +159,7 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #2563eb;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -187,7 +190,7 @@
 
         .demo-link {
             display: inline-block;
-            background: linear-gradient(135deg, #48bb78, #38a169);
+            background: #22c55e;
             color: white;
             padding: 15px 30px;
             text-decoration: none;
@@ -244,10 +247,35 @@
             color: #2c7a7b;
             margin-bottom: 10px;
         }
+
+        .header-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-info h3 {
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .header-info p {
+            color: #334155;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
     <div class="presentation-container">
+        <!-- Header Info -->
+        <div class="header-info">
+            <h3>📊 Dashboard Analytics Penjualan - Presentasi</h3>
+            <p>Setelah deploy, presentasi ini dapat diakses di: <a href="https://jubelio-fe.vercel.app/presentasi.html" target="_blank" style="color:#2563eb; text-decoration:underline; font-weight:bold;">https://jubelio-fe.vercel.app/presentasi.html</a></p>
+        </div>
+
         <!-- Slide 1: Judul -->
         <div class="slide active" id="slide1">
             <h1>📊 Dashboard Analytics Penjualan</h1>
@@ -265,7 +293,7 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                <a href="http://localhost:5173" class="demo-link" target="_blank">🚀 Lihat Demo</a>
+                <a href="/" class="demo-link" target="_blank">🚀 Lihat Dashboard</a>
             </div>
         </div>
 
@@ -494,7 +522,7 @@ python manage.py runserver<br><br>
                 <div class="feature-card">
                     <h3>🎮 Live Demo</h3>
                     <p>Dashboard dapat diakses di:</p>
-                    <a href="http://localhost:5173" class="demo-link" target="_blank">http://localhost:5173</a>
+                    <a href="/" class="demo-link" target="_blank">Dashboard Utama</a>
                 </div>
                 <div class="feature-card">
                     <h3>📊 Data Modes</h3>
@@ -583,7 +611,7 @@ python manage.py runserver<br><br>
                 </div>
                 
                 <div style="margin: 30px 0;">
-                    <a href="http://localhost:5173" class="demo-link" target="_blank">🚀 Lihat Demo Sekarang</a>
+                    <a href="/" class="demo-link" target="_blank">🚀 Lihat Dashboard Sekarang</a>
                 </div>
                 
                 <p style="font-size: 1.1em; color: #718096;">

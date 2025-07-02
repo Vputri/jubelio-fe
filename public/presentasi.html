@@ -3,677 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentasi Dashboard Analytics - Jubelio</title>
+    <title>Presentasi Mix - Dashboard & Backend</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+        .presentation-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .slide { background: #fff; border-radius: 20px; padding: 40px; margin: 20px 0; box-shadow: 0 20px 40px rgba(0,0,0,0.08); backdrop-filter: blur(10px); display: none; animation: slideIn 0.5s ease-out; }
+        .slide.active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .slide h1 { color: #2563eb; font-size: 2.2em; margin-bottom: 20px; text-align: center; }
+        .slide h2 { color: #1e293b; font-size: 1.5em; margin-bottom: 15px; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
+        .slide h3 { color: #334155; font-size: 1.15em; margin: 20px 0 10px 0; }
+        .slide p, .slide li { font-size: 1.1em; margin-bottom: 10px; color: #334155; }
+        .slide ul, .slide ol { margin-left: 30px; margin-bottom: 20px; }
+        .slide li { margin-bottom: 8px; }
+        .feature-card, .benefit-item { background: #f8fafc; padding: 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 15px; }
+        .tech-stack, .key-benefits, .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
+        .tech-item { background: #2563eb; color: #fff; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.10); }
+        .tech-item h3, .tech-item p { color: #fff !important; }
+        .code-block { background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace; margin: 15px 0; overflow-x: auto; }
+        .highlight { background: #3b82f6; color: #fff; padding: 10px 20px; border-radius: 25px; display: inline-block; margin: 10px 5px; font-weight: bold; }
+        .navigation { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.95); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); backdrop-filter: blur(10px); z-index: 1000; }
+        .nav-btn { background: #2563eb; color: #fff; border: none; padding: 10px 20px; margin: 0 5px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.18); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .slide-counter { text-align: center; margin-top: 20px; font-size: 0.9em; color: #718096; }
+        a { color: #2563eb; text-decoration: underline; }
+        .arch-diagram {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+        .arch-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-
-        .presentation-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .arch-block {
+            background: #2563eb;
+            color: #fff;
+            border-radius: 12px;
+            padding: 18px 22px;
+            min-width: 120px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 1.05em;
         }
-
-        .slide {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 20px 0;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            display: none;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .slide.active {
+        .arch-block span {
             display: block;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide h1 {
-            color: #4a5568;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-align: center;
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-        }
-
-        .slide h2 {
-            color: #2d3748;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }
-
-        .slide h3 {
-            color: #4a5568;
-            font-size: 1.3em;
-            margin: 20px 0 10px 0;
-        }
-
-        .slide p, .slide li {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            color: #4a5568;
-        }
-
-        .slide ul {
-            margin-left: 30px;
-            margin-bottom: 20px;
-        }
-
-        .slide li {
-            margin-bottom: 8px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .feature-card {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 5px solid #3b82f6;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .tech-item {
-            background: #2563eb;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
-        }
-        .tech-item h3, .tech-item p, .tech-item span, .tech-item li {
-            color: white !important;
-        }
-
-        .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            margin: 15px 0;
-            overflow-x: auto;
-        }
-
-        .highlight {
-            background: #3b82f6;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            margin: 10px 5px;
-            font-weight: bold;
-        }
-
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .nav-btn {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 5px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .slide-counter {
-            text-align: center;
-            margin-top: 20px;
             font-size: 0.9em;
-            color: #718096;
+            font-weight: normal;
+            color: #e0e7ff;
+            margin-top: 4px;
         }
-
-        .demo-link {
-            display: inline-block;
-            background: #22c55e;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            margin: 20px 10px;
-            transition: all 0.3s ease;
-        }
-
-        .demo-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .architecture-diagram {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 2px dashed #667eea;
-        }
-
-        .architecture-diagram h4 {
-            text-align: center;
-            color: #4a5568;
-            margin-bottom: 15px;
-        }
-
-        .flow-step {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .key-benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .benefit-item {
-            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid #38b2ac;
-        }
-
-        .benefit-item h4 {
-            color: #2c7a7b;
-            margin-bottom: 10px;
-        }
-
-        .header-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .header-info h3 {
-            color: #1e293b;
-            margin-bottom: 10px;
-        }
-
-        .header-info p {
-            color: #334155;
-            font-size: 1.1em;
+        .arch-arrow {
+            font-size: 2em;
+            color: #2563eb;
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <!-- Header Info -->
-        <div class="header-info">
-            <h3>📊 Dashboard Analytics Penjualan - Presentasi</h3>
-            <p>Setelah deploy, presentasi ini dapat diakses di: <a href="https://jubelio-fe.vercel.app/presentasi.html" target="_blank" style="color:#2563eb; text-decoration:underline; font-weight:bold;">https://jubelio-fe.vercel.app/presentasi.html</a></p>
+<div class="presentation-container">
+    <!-- Slide 1: Cover & Agenda -->
+    <div class="slide active" id="slide1">
+        <h1>📊 SISTEM ANALISIS DATA SUPERMARKET <br/>& DASHBOARD PENJUALAN</h1>
+        <h2>Presentasi Proyek Django, PostgreSQL, React, TypeScript</h2>
+        <div class="feature-card">
+            <h3>Agenda Presentasi</h3>
+            <ol>
+                <li>Ringkasan Proyek</li>
+                <li>Teknologi & Arsitektur</li>
+                <li>Demo API & Dashboard</li>
+                <li>Hasil & Manfaat</li>
+                <li>Kesimpulan & Next Steps</li>
+            </ol>
         </div>
-
-        <!-- Slide 1: Judul -->
-        <div class="slide active" id="slide1">
-            <h1>📊 Dashboard Analytics Penjualan</h1>
-            <h2>Jubelio Frontend Project</h2>
-            <div style="text-align: center; margin: 40px 0;">
-                <p style="font-size: 1.3em; color: #4a5568;">
-                    Dashboard interaktif untuk analisis data penjualan dengan visualisasi chart yang modern
-                </p>
-                <div style="margin: 30px 0;">
-                    <span class="highlight">React 19</span>
-                    <span class="highlight">TypeScript</span>
-                    <span class="highlight">Tanstack Query</span>
-                    <span class="highlight">Zustand</span>
-                    <span class="highlight">Plotly.js</span>
-                </div>
-            </div>
-            <div style="text-align: center;">
-                <a href="/" class="demo-link" target="_blank">🚀 Lihat Dashboard</a>
-            </div>
+    </div>
+    <!-- Slide 2: Ringkasan Proyek -->
+    <div class="slide" id="slide2">
+        <h1>🎯 RINGKASAN PROYEK</h1>
+        <div class="feature-card">
+            <h3>Tujuan Proyek</h3>
+            <p>Mengembangkan sistem backend dan dashboard analitik penjualan supermarket berbasis Django, PostgreSQL, React, dan TypeScript.</p>
         </div>
-
-        <!-- Slide 2: Overview Project -->
-        <div class="slide" id="slide2">
-            <h1>🎯 Overview Project</h1>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>📈 Tujuan</h3>
-                    <p>Membangun dashboard analytics yang menampilkan data penjualan dengan visualisasi yang interaktif dan informatif</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🎨 Fitur Utama</h3>
-                    <ul>
-                        <li>3 Chart interaktif (Pie, Scatter, Heatmap)</li>
-                        <li>Integrasi API Django backend</li>
-                        <li>Filter data real-time</li>
-                        <li>Responsive design</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>🔧 Teknologi</h3>
-                    <ul>
-                        <li>Frontend: React + TypeScript</li>
-                        <li>State Management: Zustand</li>
-                        <li>Data Fetching: Tanstack Query</li>
-                        <li>Charts: Plotly.js</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3: Technology Stack -->
-        <div class="slide" id="slide3">
-            <h1>🛠️ Technology Stack</h1>
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <h3>React 19</h3>
-                    <p>Frontend Framework</p>
-                </div>
-                <div class="tech-item">
-                    <h3>TypeScript</h3>
-                    <p>Type Safety</p>
-                </div>
-                <div class="tech-item">
-                    <h3>Tanstack Query</h3>
-                    <p>Data Fetching & Caching</p>
-                </div>
-                <div class="tech-item">
-                    <h3>Zustand</h3>
-                    <p>State Management</p>
-                </div>
-                <div class="tech-item">
-                    <h3>Plotly.js</h3>
-                    <p>Chart Visualization</p>
-                </div>
-                <div class="tech-item">
-                    <h3>Vite</h3>
-                    <p>Build Tool</p>
-                </div>
-            </div>
-            <h3>Backend Integration:</h3>
-            <div class="tech-item" style="grid-column: 1 / -1;">
-                <h3>Django API</h3>
-                <p>Python Backend dengan REST API</p>
-            </div>
-        </div>
-
-        <!-- Slide 4: Fitur Charts -->
-        <div class="slide" id="slide4">
-            <h1>📊 Fitur Charts</h1>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>🥧 Pie Chart</h3>
-                    <p><strong>Most Sold Products</strong></p>
-                    <ul>
-                        <li>Menampilkan produk terlaris</li>
-                        <li>Distribusi persentase penjualan</li>
-                        <li>Hover effects interaktif</li>
-                        <li>Custom color palette</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>📈 Scatter Plot</h3>
-                    <p><strong>Discount vs Quantity</strong></p>
-                    <ul>
-                        <li>Korelasi diskon vs kuantitas</li>
-                        <li>Color-coded berdasarkan quantity</li>
-                        <li>Tooltip dengan detail data</li>
-                        <li>Zoom dan pan capabilities</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>🔥 Heatmap</h3>
-                    <p><strong>Sales by State & Category</strong></p>
-                    <ul>
-                        <li>Visualisasi penjualan per negara</li>
-                        <li>Kategori produk pada Y-axis</li>
-                        <li>Intensitas warna = volume penjualan</li>
-                        <li>Interactive hover information</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: Architecture -->
-        <div class="slide" id="slide5">
-            <h1>🏗️ Architecture & Data Flow</h1>
-            <div class="architecture-diagram">
-                <h4>Alur Data Dashboard</h4>
-                <div class="flow-step">
-                    <strong>1. API Request</strong> - Tanstack Query mengirim request ke Django API
-                </div>
-                <div class="flow-step">
-                    <strong>2. Data Processing</strong> - API Service menangani response dan error handling
-                </div>
-                <div class="flow-step">
-                    <strong>3. State Management</strong> - Zustand mengelola UI state dan filters
-                </div>
-                <div class="flow-step">
-                    <strong>4. Chart Rendering</strong> - Plotly.js merender visualisasi data
-                </div>
-            </div>
-            <h3>API Endpoints:</h3>
-            <div class="code-block">
-GET /supermarket/api/most-sold-products/<br>
-GET /supermarket/api/discount-quantity-correlation/<br>
-GET /supermarket/api/quantity-by-country/
-            </div>
-        </div>
-
-        <!-- Slide 6: Project Structure -->
-        <div class="slide" id="slide6">
-            <h1>📁 Project Structure</h1>
-            <div class="code-block">
-src/<br>
-├── components/          # React components<br>
-│   ├── Dashboard.tsx   # Main dashboard component<br>
-│   ├── PieChart.tsx    # Pie chart component<br>
-│   ├── ScatterPlot.tsx # Scatter plot component<br>
-│   ├── Heatmap.tsx     # Heatmap component<br>
-│   ├── FilterPanel.tsx # Filter panel component<br>
-│   └── Dashboard.css   # Dashboard styles<br>
-├── hooks/              # Custom React hooks<br>
-│   └── useProducts.ts  # Tanstack Query hooks<br>
-├── services/           # API services<br>
-│   └── api.ts         # API service functions<br>
-├── store/              # Zustand stores<br>
-│   └── uiStore.ts     # UI state management<br>
-├── types/              # TypeScript types<br>
-│   └── dashboard.ts   # Dashboard data types<br>
-├── App.tsx            # Main app component<br>
-└── main.tsx           # App entry point
-            </div>
-        </div>
-
-        <!-- Slide 7: Key Features -->
-        <div class="slide" id="slide7">
-            <h1>✨ Key Features</h1>
-            <div class="key-benefits">
-                <div class="benefit-item">
-                    <h4>🚀 Real-time Data</h4>
-                    <p>Integrasi langsung dengan Django API untuk data real-time</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>📱 Responsive Design</h4>
-                    <p>Works seamlessly di desktop, tablet, dan mobile</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>🎨 Modern UI</h4>
-                    <p>Glassmorphism effects dengan gradient background</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>⚡ Performance</h4>
-                    <p>Optimized dengan React Query caching dan memoization</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>🔧 Error Handling</h4>
-                    <p>Graceful error states dengan fallback ke mock data</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>🎯 Type Safety</h4>
-                    <p>Full TypeScript support untuk maintainability</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 8: Setup & Installation -->
-        <div class="slide" id="slide8">
-            <h1>⚙️ Setup & Installation</h1>
-            <h3>Prerequisites:</h3>
+        <div class="feature-card">
+            <h3>Dataset</h3>
             <ul>
-                <li>Node.js (version 16 atau lebih tinggi)</li>
-                <li>npm atau yarn</li>
-                <li>Python 3.8+ (untuk Django backend)</li>
-                <li>Django server running di port 8000</li>
+                <li>Sumber: Kaggle Supermarket Dataset</li>
+                <li>Ukuran: 9,994 records, 21 kolom</li>
+                <li>Format: Excel (.xlsx)</li>
+                <li>Kategori: Technology, Furniture, Office Supplies</li>
             </ul>
-            
-            <h3>Frontend Setup:</h3>
-            <div class="code-block">
-# Clone repository<br>
-git clone &lt;repository-url&gt;<br>
-cd jubelio-fe<br><br>
-
-# Install dependencies<br>
-npm install<br><br>
-
-# Start development server<br>
-npm run dev
-            </div>
-            
-            <h3>Backend Setup:</h3>
-            <div class="code-block">
-# Di direktori Django project<br>
-python manage.py runserver<br><br>
-
-# Configure CORS di settings.py<br>
-# Lihat cors-config.md untuk detail
-            </div>
         </div>
-
-        <!-- Slide 9: Demo & Testing -->
-        <div class="slide" id="slide9">
-            <h1>🧪 Demo & Testing</h1>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>🎮 Live Demo</h3>
-                    <p>Dashboard dapat diakses di:</p>
-                    <a href="/" class="demo-link" target="_blank">Dashboard Utama</a>
-                </div>
-                <div class="feature-card">
-                    <h3>📊 Data Modes</h3>
-                    <ul>
-                        <li><strong>Real Data:</strong> Dari Django API</li>
-                        <li><strong>Mock Data:</strong> Fallback jika API tidak tersedia</li>
-                        <li>Automatic switching</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>🔍 Testing Features</h3>
-                    <ul>
-                        <li>Filter by Category</li>
-                        <li>Filter by State</li>
-                        <li>Interactive charts</li>
-                        <li>Responsive testing</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="feature-card">
+            <h3>Output</h3>
+            <ul>
+                <li>REST API untuk visualisasi data</li>
+                <li>Database PostgreSQL terstruktur</li>
+                <li>Dashboard frontend interaktif</li>
+                <li>Dokumentasi lengkap (Swagger)</li>
+            </ul>
         </div>
-
-        <!-- Slide 10: Future Enhancements -->
-        <div class="slide" id="slide10">
-            <h1>🔮 Future Enhancements</h1>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>📈 Additional Charts</h3>
-                    <ul>
-                        <li>Line chart untuk trend analysis</li>
-                        <li>Bar chart untuk comparison</li>
-                        <li>3D visualizations</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>🔔 Real-time Updates</h3>
-                    <ul>
-                        <li>WebSocket integration</li>
-                        <li>Live data streaming</li>
-                        <li>Push notifications</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>📱 Mobile App</h3>
-                    <ul>
-                        <li>React Native version</li>
-                        <li>Offline capabilities</li>
-                        <li>Push notifications</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3>🤖 AI Integration</h3>
-                    <ul>
-                        <li>Predictive analytics</li>
-                        <li>Anomaly detection</li>
-                        <li>Smart recommendations</li>
-                    </ul>
-                </div>
-            </div>
+    </div>
+    <!-- Slide 3: Stack Teknologi -->
+    <div class="slide" id="slide3">
+        <h1>🛠️ TECHNOLOGY STACK</h1>
+        <div class="tech-stack">
+            <div class="tech-item"><h3>Django 5.2.3</h3><p>Backend Framework</p></div>
+            <div class="tech-item"><h3>PostgreSQL</h3><p>Database</p></div>
+            <div class="tech-item"><h3>Pandas</h3><p>Data Processing</p></div>
+            <div class="tech-item"><h3>OpenPyXL</h3><p>Excel Handling</p></div>
+            <div class="tech-item"><h3>Docker</h3><p>Containerization</p></div>
+            <div class="tech-item"><h3>Swagger</h3><p>API Docs</p></div>
+            <div class="tech-item"><h3>React 19</h3><p>Frontend</p></div>
+            <div class="tech-item"><h3>TypeScript</h3><p>Type Safety</p></div>
+            <div class="tech-item"><h3>Tanstack Query</h3><p>Data Fetching</p></div>
+            <div class="tech-item"><h3>Zustand</h3><p>State Management</p></div>
+            <div class="tech-item"><h3>Plotly.js</h3><p>Chart Visualization</p></div>
+            <div class="tech-item"><h3>Vite</h3><p>Build Tool</p></div>
         </div>
-
-        <!-- Slide 11: Conclusion -->
-        <div class="slide" id="slide11">
-            <h1>🎉 Kesimpulan</h1>
-            <div style="text-align: center; margin: 40px 0;">
-                <h2>✅ Project Successfully Completed!</h2>
-                <p style="font-size: 1.2em; margin: 20px 0;">
-                    Dashboard analytics penjualan telah berhasil dibangun dengan teknologi modern dan fitur yang komprehensif.
-                </p>
-                
-                <div style="margin: 30px 0;">
-                    <h3>🎯 Achievements:</h3>
-                    <div class="key-benefits">
-                        <div class="benefit-item">
-                            <h4>📊 3 Interactive Charts</h4>
-                            <p>Pie, Scatter, Heatmap</p>
-                        </div>
-                        <div class="benefit-item">
-                            <h4>🔗 API Integration</h4>
-                            <p>Django backend connected</p>
-                        </div>
-                        <div class="benefit-item">
-                            <h4>⚡ Modern Stack</h4>
-                            <p>React + TypeScript + Tanstack Query</p>
-                        </div>
+    </div>
+    <!-- Slide 4: Arsitektur Sistem -->
+    <div class="slide" id="slide4">
+        <h1>🏛️ ARSITEKTUR SISTEM</h1>
+        <div class="arch-diagram">
+            <div style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+                <!-- Kiri: Excel File ke Django App -->
+                <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 10px;">
+                    <div class="arch-block">📂 Excel File<br><span>Kaggle</span></div>
+                    <div class="arch-arrow">➡️</div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0;">
+                        <div class="arch-block">🟦 Django App<br><span>Backend</span></div>
+                        <div class="arch-arrow" style="font-size:2em; margin: 0.2em 0;">⬇️</div>
+                        <div class="arch-block">🔗 REST API<br><span>Endpoints</span></div>
+                        <div class="arch-arrow" style="font-size:2em; margin: 0.2em 0;">⬇️</div>
+                        <div class="arch-block">💻 Frontend<br><span>Visualization</span></div>
                     </div>
                 </div>
-                
-                <div style="margin: 30px 0;">
-                    <a href="/" class="demo-link" target="_blank">🚀 Lihat Dashboard Sekarang</a>
+                <!-- Kanan: PostgreSQL -->
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 40px;">
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+                        <div class="arch-arrow">➡️</div>
+                        <div class="arch-block">🗄️ PostgreSQL<br><span>Database</span></div>
+                    </div>
                 </div>
-                
-                <p style="font-size: 1.1em; color: #718096;">
-                    Terima kasih telah menyaksikan presentasi ini! 🎊
-                </p>
             </div>
         </div>
     </div>
+    <!-- Slide 5: Database Models -->
+    <div class="slide" id="slide5">
+        <h1>📊 DATABASE MODELS</h1>
+        <div class="code-block">
+<pre><code class="language-python">
+class Category(models.Model):
+    name = models.CharField(max_length=100)
 
-    <!-- Navigation -->
-    <div class="navigation">
-        <button class="nav-btn" onclick="previousSlide()" id="prevBtn">← Sebelumnya</button>
-        <span id="slideCounter">Slide 1 dari 11</span>
-        <button class="nav-btn" onclick="nextSlide()" id="nextBtn">Selanjutnya →</button>
+class SubCategory(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Sales(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    discount = models.DecimalField(max_digits=3, decimal_places=2)
+    profit = models.DecimalField(max_digits=10, decimal_places=2)
+    state = models.CharField(max_length=50)
+    region = models.CharField(max_length=50)
+    date = models.DateField()
+</code></pre>
+        </div>
     </div>
-
-    <script>
-        let currentSlide = 1;
-        const totalSlides = 11;
-
-        function showSlide(slideNumber) {
-            // Hide all slides
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            // Show current slide
-            document.getElementById(`slide${slideNumber}`).classList.add('active');
-            
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = slideNumber === 1;
-            document.getElementById('nextBtn').disabled = slideNumber === totalSlides;
-            
-            // Update counter
-            document.getElementById('slideCounter').textContent = `Slide ${slideNumber} dari ${totalSlides}`;
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        }
-
-        function previousSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowRight' || event.key === ' ') {
-                nextSlide();
-            } else if (event.key === 'ArrowLeft') {
-                previousSlide();
-            }
+    <!-- Slide 6: API Endpoints -->
+    <div class="slide" id="slide6">
+        <h1>🔌 API ENDPOINTS</h1>
+        <div class="feature-card">
+            <h3>1. Most Sold Products</h3>
+            <div class="code-block">GET /api/most-sold-products/</div>
+            <p>Purpose: Data untuk pie chart produk terlaris</p>
+        </div>
+        <div class="feature-card">
+            <h3>2. Discount Correlation</h3>
+            <div class="code-block">GET /api/discount-correlation/</div>
+            <p>Purpose: Korelasi diskon vs kuantitas per negara</p>
+        </div>
+        <div class="feature-card">
+            <h3>3. Quantity by Country</h3>
+            <div class="code-block">GET /api/quantity-by-country/</div>
+            <p>Purpose: Penjualan per negara dan kategori</p>
+        </div>
+    </div>
+    <!-- Slide 7: Data Insights -->
+    <div class="slide" id="slide7">
+        <h1>📈 DATA INSIGHTS</h1>
+        <div class="feature-card">
+            <h3>Top Categories Performance</h3>
+            <ol>
+                <li>Technology - 37% dari total penjualan</li>
+                <li>Furniture - 33% dari total penjualan</li>
+                <li>Office Supplies - 30% dari total penjualan</li>
+            </ol>
+        </div>
+        <div class="feature-card">
+            <h3>Key Metrics</h3>
+            <ul>
+                <li>Total Products: 1,850 produk unik</li>
+                <li>Total Sales: 5,009 transaksi</li>
+                <li>Date Range: 2014-2017</li>
+                <li>Geographic Coverage: 49 negara bagian</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Business Insights</h3>
+            <ul>
+                <li>Technology menunjukkan performa terbaik</li>
+                <li>Furniture memiliki margin profit tertinggi</li>
+                <li>Office Supplies konsisten di semua region</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Slide 8: Manfaat Bisnis -->
+    <div class="slide" id="slide8">
+        <h1>🎯 MANFAAT BISNIS</h1>
+        <div class="feature-card">
+            <h3>Analytics Capabilities</h3>
+            <ul>
+                <li>Product Performance Analysis</li>
+                <li>Pricing Optimization</li>
+                <li>Geographic Insights</li>
+                <li>Trend Analysis</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Strategic Benefits</h3>
+            <ul>
+                <li>Data-Driven Decisions</li>
+                <li>Market Expansion</li>
+                <li>Inventory Management</li>
+                <li>Pricing Strategy</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Slide 9: Fitur Teknis & Security -->
+    <div class="slide" id="slide9">
+        <h1>🛠️ FITUR TEKNIS & SECURITY</h1>
+        <div class="feature-card">
+            <h3>Data Import System</h3>
+            <ul>
+                <li>Automated Excel processing</li>
+                <li>Data cleaning dan validation</li>
+                <li>Bulk import dengan transaction safety</li>
+                <li>Error handling yang robust</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>API Features</h3>
+            <ul>
+                <li>RESTful design principles</li>
+                <li>CORS support untuk frontend</li>
+                <li>Comprehensive error responses</li>
+                <li>Rate limiting ready</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Security Measures</h3>
+            <ul>
+                <li>CORS configuration yang proper</li>
+                <li>Input validation dan sanitization</li>
+                <li>SQL injection prevention</li>
+                <li>XSS protection</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Slide 10: Deployment & Demo -->
+    <div class="slide" id="slide10">
+        <h1>🚀 DEPLOYMENT, DEMO & TESTING</h1>
+        <div class="feature-card">
+            <h3>Deployment</h3>
+            <ul>
+                <li>Docker containerization</li>
+                <li>Production ready</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Demo & Testing</h3>
+            <ul>
+                <li>API Test Script: <code>test_api.py</code></li>
+                <li>CORS Test: <code>test_cors.html</code></li>
+                <li>Manual Testing : <a href="http://localhost:8000/swagger/">Swagger UI</a></li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Frontend Demo</h3>
+            <a href="/" class="demo-link" target="_blank">🚀 Lihat Dashboard</a>
+        </div>
+    </div>
+    <!-- Slide 11: Future Enhancements -->
+    <div class="slide" id="slide11">
+        <h1>🔮 FUTURE ENHANCEMENTS</h1>
+        <div class="feature-card">
+            <h3>Short Term</h3>
+            <ul>
+                <li>Frontend dashboard development</li>
+                <li>Real-time analytics features</li>
+                <li>Mobile app integration</li>
+                <li>Advanced reporting tools</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Medium Term</h3>
+            <ul>
+                <li>Machine learning integration</li>
+                <li>Predictive analytics</li>
+                <li>Advanced visualization</li>
+                <li>Multi-tenant architecture</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Long Term</h3>
+            <ul>
+                <li>AI-powered insights</li>
+                <li>IoT integration</li>
+                <li>Blockchain implementation</li>
+                <li>Global expansion support</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Slide 12: Kesimpulan & Kontak -->
+    <div class="slide" id="slide12">
+        <h1>🎉 KESIMPULAN & KONTAK</h1>
+        <div class="feature-card">
+            <h3>Project Success</h3>
+            <ul>
+                <li>✅ Backend & dashboard analitik berhasil dibangun</li>
+                <li>✅ API & database optimal</li>
+                <li>✅ Data insights untuk bisnis</li>
+                <li>✅ Dokumentasi & testing lengkap</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Contact Person</h3>
+            <ul>
+                <li><strong>Name</strong>: Vika Putri Ariyanti</li>
+                <li><strong>Email</strong>: vikaputriariyanti@gmail.com</li>
+                <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/vikaputriariyanti/">linkedin.com/in/vikaputriariyanti</a></li>
+                <li><strong>GitHub</strong>: <a href="https://github.com/Vputri">github.com/Vputri</a></li>
+            </ul>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <p>Terima kasih telah menyaksikan presentasi ini! 🎊</p>
+        </div>
+    </div>
+</div>
+<div class="navigation">
+    <button class="nav-btn" onclick="previousSlide()" id="prevBtn">← Sebelumnya</button>
+    <span id="slideCounter">Slide 1 dari 12</span>
+    <button class="nav-btn" onclick="nextSlide()" id="nextBtn">Selanjutnya →</button>
+</div>
+<script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+    function showSlide(slideNumber) {
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.classList.remove('active');
         });
-
-        // Initialize
-        showSlide(1);
-    </script>
+        document.getElementById(`slide${slideNumber}`).classList.add('active');
+        document.getElementById('prevBtn').disabled = slideNumber === 1;
+        document.getElementById('nextBtn').disabled = slideNumber === totalSlides;
+        document.getElementById('slideCounter').textContent = `Slide ${slideNumber} dari ${totalSlides}`;
+    }
+    function nextSlide() { if (currentSlide < totalSlides) { currentSlide++; showSlide(currentSlide); } }
+    function previousSlide() { if (currentSlide > 1) { currentSlide--; showSlide(currentSlide); } }
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight' || event.key === ' ') { nextSlide(); }
+        else if (event.key === 'ArrowLeft') { previousSlide(); }
+    });
+    showSlide(1);
+</script>
 </body>
 </html> 
