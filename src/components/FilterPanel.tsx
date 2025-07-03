@@ -1,32 +1,26 @@
 import { useUIStore } from '../store/uiStore';
 import { useFilterOptions } from '../hooks/useFilterOptions';
-import { useState } from 'react';
 
 export const FilterPanel: React.FC = () => {
   const {
     selectedCategory,
     selectedSubcategory,
     selectedCountry,
+    selectedState,
+    selectedCity,
     selectedRegion,
-    selectedStateCity,
-    showFilters,
     setSelectedCategory,
     setSelectedSubcategory,
     setSelectedCountry,
+    setSelectedState,
+    setSelectedCity,
     setSelectedRegion,
-    setSelectedStateCity,
+    showFilters,
     setShowFilters,
     resetFilters,
   } = useUIStore();
 
   const { options, loading, error } = useFilterOptions();
-
-  const [localStateCity, setLocalStateCity] = useState<string | null>(null);
-
-  const stateCity = typeof selectedStateCity !== 'undefined' ? selectedStateCity : localStateCity;
-  const setStateCity = typeof setSelectedStateCity !== 'undefined' ? setSelectedStateCity : setLocalStateCity;
-
-  const stateCityOptions = options ? Array.from(new Set([...(options.states || []), ...(options.cities || [])])) : [];
 
   return (
     <div className="filter-panel">
@@ -80,14 +74,26 @@ export const FilterPanel: React.FC = () => {
                 </select>
               </div>
               <div className="filter-group">
-                <label>State/City:</label>
+                <label>State:</label>
                 <select
-                  value={stateCity || ''}
-                  onChange={(e) => setStateCity(e.target.value || null)}
+                  value={selectedState || ''}
+                  onChange={(e) => setSelectedState(e.target.value || null)}
                 >
-                  <option value="">All State/Cities</option>
-                  {stateCityOptions.map(opt => (
-                    <option key={opt} value={opt}>{opt}</option>
+                  <option value="">All States</option>
+                  {options.states.map(state => (
+                    <option key={state} value={state}>{state}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="filter-group">
+                <label>City:</label>
+                <select
+                  value={selectedCity || ''}
+                  onChange={(e) => setSelectedCity(e.target.value || null)}
+                >
+                  <option value="">All Cities</option>
+                  {options.cities.map(city => (
+                    <option key={city} value={city}>{city}</option>
                   ))}
                 </select>
               </div>
@@ -105,10 +111,7 @@ export const FilterPanel: React.FC = () => {
               </div>
               <button
                 className="reset-filters"
-                onClick={() => {
-                  resetFilters();
-                  setStateCity(null);
-                }}
+                onClick={resetFilters}
               >
                 Reset Filters
               </button>
