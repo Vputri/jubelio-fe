@@ -13,11 +13,15 @@
         @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .slide h1 { color: #2563eb; font-size: 2.2em; margin-bottom: 20px; text-align: center; }
         .slide h2 { color: #1e293b; font-size: 1.5em; margin-bottom: 15px; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
-        .slide h3 { color: #334155; font-size: 1.15em; margin: 20px 0 10px 0; }
-        .slide p, .slide li { font-size: 1.1em; margin-bottom: 10px; color: #334155; }
+        .slide h3 { color: #334155; font-size: 1.25em; margin: 20px 0 10px 0; font-weight: bold; }
+        .slide p, .slide li { font-size: 1.13em; margin-bottom: 10px; color: #334155; }
         .slide ul, .slide ol { margin-left: 30px; margin-bottom: 20px; }
-        .slide li { margin-bottom: 8px; }
-        .feature-card, .benefit-item { background: #f8fafc; padding: 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 15px; }
+        .slide li { margin-bottom: 10px; }
+        .feature-card, .benefit-item { background: #f8fafc; padding: 24px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 22px; }
+        .feature-card ul { margin-bottom: 0; }
+        .feature-card > ul > li { font-size: 1.13em; font-weight: 600; margin-bottom: 12px; }
+        .feature-card ul ul { margin-top: 6px; margin-bottom: 10px; }
+        .feature-card ul ul li { font-size: 1.05em; font-weight: 400; color: #475569; margin-bottom: 7px; }
         .tech-stack, .key-benefits, .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
         .tech-item { background: #2563eb; color: #fff; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.10); }
         .tech-item h3, .tech-item p { color: #fff !important; }
@@ -129,11 +133,15 @@
     <div class="slide" id="slide4">
         <h1>🏛️ ARSITEKTUR SISTEM</h1>
         <div class="arch-diagram">
-            <div style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+            <div style="display: flex; justify-content: center; align-items: flex-start; gap: 10px; flex-wrap: wrap;">
                 <!-- Kiri: Excel File ke Django App -->
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 40px;">
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+                        <div class="arch-block">📂 Excel File<br><span>Kaggle</span></div>
+                        <div class="arch-arrow">➡️</div>
+                    </div>
+                </div>
                 <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 10px;">
-                    <div class="arch-block">📂 Excel File<br><span>Kaggle</span></div>
-                    <div class="arch-arrow">➡️</div>
                     <div style="display: flex; flex-direction: column; align-items: center; gap: 0;">
                         <div class="arch-block">🟦 Django App<br><span>Backend</span></div>
                         <div class="arch-arrow" style="font-size:2em; margin: 0.2em 0;">⬇️</div>
@@ -199,8 +207,36 @@ class Sales(models.Model):
             <p>Purpose: Penjualan per negara dan kategori</p>
         </div>
     </div>
-    <!-- Slide 7: Data Insights -->
+    <!-- Slide 7: Visualisasi Dashboard & Penggunaan Filter -->
     <div class="slide" id="slide7">
+        <h1>📊 DASHBOARD & FILTER</h1>
+        <div class="feature-card">
+            <h3>Visualisasi Data</h3>
+            <ul>
+                <li><b>Pie Chart - Most Sold Products:</b> Menampilkan proporsi penjualan tiap produk. Irisan terbesar = produk terlaris.</li>
+                <li><b>Scatter Plot - Discount vs Quantity Sold:</b> Menunjukkan hubungan antara diskon dan jumlah terjual. Setiap titik = wilayah, warna = kuantitas.</li>
+                <li><b>Heatmap - Product Sales by State:</b> Distribusi penjualan berdasarkan negara/wilayah dan kategori. Warna gelap = penjualan tinggi.</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Cara Penggunaan Filter</h3>
+            <ul>
+                <li>Gunakan dropdown <b>Category, Subcategory, Country, State, City, Region</b> untuk memfokuskan analisis.</li>
+                <li>Contoh: Filter "Technology" di "California" untuk melihat performa spesifik.</li>
+                <li>Klik <b>Reset Filters</b> untuk kembali ke seluruh data.</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3>Insight & Manfaat</h3>
+            <ul>
+                <li>Identifikasi produk terlaris dan kontribusinya.</li>
+                <li>Analisis pengaruh diskon terhadap penjualan.</li>
+                <li>Temukan wilayah/kategori dengan performa terbaik atau peluang pengembangan.</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Slide 8: Data Insights -->
+    <div class="slide" id="slide8">
         <h1>📈 DATA INSIGHTS</h1>
         <div class="feature-card">
             <h3>Top Categories Performance</h3>
@@ -228,30 +264,62 @@ class Sales(models.Model):
             </ul>
         </div>
     </div>
-    <!-- Slide 8: Manfaat Bisnis -->
-    <div class="slide" id="slide8">
+    <!-- Slide 9: Manfaat Bisnis -->
+    <div class="slide" id="slide9">
         <h1>🎯 MANFAAT BISNIS</h1>
         <div class="feature-card">
             <h3>Analytics Capabilities</h3>
             <ul>
-                <li>Product Performance Analysis</li>
-                <li>Pricing Optimization</li>
-                <li>Geographic Insights</li>
-                <li>Trend Analysis</li>
+                <li><b>Product Performance Analysis:</b> Menganalisis performa setiap produk berdasarkan data penjualan.
+                    <ul>
+                        <li>Contoh: Pie Chart "Most Sold Products" menunjukkan produk terlaris. Filter dapat digunakan untuk analisis per kategori/region.</li>
+                    </ul>
+                </li>
+                <li><b>Pricing Optimization:</b> Menentukan harga dan diskon optimal agar penjualan meningkat tanpa mengorbankan margin.
+                    <ul>
+                        <li>Contoh: Scatter Plot "Discount vs Quantity Sold" memperlihatkan pengaruh diskon terhadap penjualan. Bisa dianalisis diskon optimal untuk tiap kategori.</li>
+                    </ul>
+                </li>
+                <li><b>Geographic Insights:</b> Mengetahui wilayah dengan penjualan tertinggi/rendah untuk strategi distribusi dan pemasaran.
+                    <ul>
+                        <li>Contoh: Heatmap "Product Sales by State" memperlihatkan penjualan per negara/kategori. Dapat ditemukan peluang ekspansi wilayah.</li>
+                    </ul>
+                </li>
+                <li><b>Trend Analysis:</b> Menganalisis tren penjualan dari waktu ke waktu untuk prediksi permintaan dan deteksi penurunan performa.
+                    <ul>
+                        <li>Contoh: Jika dashboard menampilkan data per bulan/tahun, tren naik/turun bisa diidentifikasi untuk strategi bisnis ke depan.</li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <div class="feature-card">
             <h3>Strategic Benefits</h3>
             <ul>
-                <li>Data-Driven Decisions</li>
-                <li>Market Expansion</li>
-                <li>Inventory Management</li>
-                <li>Pricing Strategy</li>
+                <li><b>Data-Driven Decisions:</b> Pengambilan keputusan bisnis berbasis data nyata, bukan asumsi, sehingga lebih akurat dan terukur.
+                    <ul>
+                        <li>Contoh: Manajemen menambah stok produk terlaris berdasarkan data pie chart, atau menghentikan promosi di wilayah yang tidak responsif terhadap diskon.</li>
+                    </ul>
+                </li>
+                <li><b>Market Expansion:</b> Identifikasi wilayah/kategori potensial untuk ekspansi pasar berdasarkan data penjualan aktual.
+                    <ul>
+                        <li>Contoh: Dari heatmap, region "West" masih rendah penjualannya untuk kategori Furniture, sehingga bisa jadi target ekspansi.</li>
+                    </ul>
+                </li>
+                <li><b>Inventory Management:</b> Optimasi stok barang dengan memantau tren penjualan dan menghindari overstock/stockout.
+                    <ul>
+                        <li>Contoh: Jika penjualan produk tertentu melonjak di satu wilayah, stok bisa segera ditambah. Produk stagnan bisa dikurangi stoknya.</li>
+                    </ul>
+                </li>
+                <li><b>Pricing Strategy:</b> Menentukan strategi harga dan diskon yang optimal berdasarkan analisis korelasi diskon dan penjualan.
+                    <ul>
+                        <li>Contoh: Dari scatter plot, bisa diketahui diskon berapa persen yang paling efektif menaikkan penjualan untuk tiap kategori/wilayah.</li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
-    <!-- Slide 9: Fitur Teknis & Security -->
-    <div class="slide" id="slide9">
+    <!-- Slide 10: Fitur Teknis & Security -->
+    <div class="slide" id="slide10">
         <h1>🛠️ FITUR TEKNIS & SECURITY</h1>
         <div class="feature-card">
             <h3>Data Import System</h3>
@@ -281,8 +349,8 @@ class Sales(models.Model):
             </ul>
         </div>
     </div>
-    <!-- Slide 10: Deployment & Demo -->
-    <div class="slide" id="slide10">
+    <!-- Slide 11: Deployment & Demo -->
+    <div class="slide" id="slide11">
         <h1>🚀 DEPLOYMENT, DEMO & TESTING</h1>
         <div class="feature-card">
             <h3>Deployment</h3>
@@ -304,8 +372,8 @@ class Sales(models.Model):
             <a href="/" class="demo-link" target="_blank">🚀 Lihat Dashboard</a>
         </div>
     </div>
-    <!-- Slide 11: Future Enhancements -->
-    <div class="slide" id="slide11">
+    <!-- Slide 12: Future Enhancements -->
+    <div class="slide" id="slide12">
         <h1>🔮 FUTURE ENHANCEMENTS</h1>
         <div class="feature-card">
             <h3>Short Term</h3>
@@ -335,8 +403,8 @@ class Sales(models.Model):
             </ul>
         </div>
     </div>
-    <!-- Slide 12: Kesimpulan & Kontak -->
-    <div class="slide" id="slide12">
+    <!-- Slide 13: Kesimpulan & Kontak -->
+    <div class="slide" id="slide13">
         <h1>🎉 KESIMPULAN & KONTAK</h1>
         <div class="feature-card">
             <h3>Project Success</h3>
@@ -363,12 +431,12 @@ class Sales(models.Model):
 </div>
 <div class="navigation">
     <button class="nav-btn" onclick="previousSlide()" id="prevBtn">← Sebelumnya</button>
-    <span id="slideCounter">Slide 1 dari 12</span>
+    <span id="slideCounter">Slide 1 dari 13</span>
     <button class="nav-btn" onclick="nextSlide()" id="nextBtn">Selanjutnya →</button>
 </div>
 <script>
     let currentSlide = 1;
-    const totalSlides = 12;
+    const totalSlides = 13;
     function showSlide(slideNumber) {
         document.querySelectorAll('.slide').forEach(slide => {
             slide.classList.remove('active');
